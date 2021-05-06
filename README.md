@@ -4,8 +4,8 @@
 
 ### Sequence Diagram
 
-![Protocole Sequence](./doc/img/ProtocoleSequences.png)
+![Protocole Sequence](./doc/img/ProtocoleSequences/ProtocoleSequences.png)
 
-### Data Messages
+### Messages
 
-![Message Classes](./doc/img/MessagesClasses.png)
+![Message Classes](./doc/img/MessagesClasses/MessagesClasses.png)
