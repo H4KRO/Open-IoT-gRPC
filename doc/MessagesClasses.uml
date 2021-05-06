@@ -98,6 +98,7 @@ package Structures <<node>> {
         class DataConfiguration {
             String key
             Integer interval
+            DataType dataType
         }
 
         enum DataUpdateType {
