@@ -1,35 +1,54 @@
 @startuml
 
-class UpdateContextRequest {
+package Register {
+
+    class RegisterRequest {
+        String id
+    }
+
+    class RegisterReply {
+        bool knowed
+    }
 
 }
 
+package UpdateContext {
 
-enum UpStreamType {
-    AUTO
-    ASK
-    TEMPO
-}
+    class UpdateContextRequest {
 
-enum DataType {
-    INTEGER
-    FLOAT
-    BOOL
-    STRING
-    JSON
-}
+    }
 
-class DataConfig {
-    String key
+    class UpdateContextReply {
 
-}
+    }
 
-class EntryConfig {
-    String key
-}
 
-class EventConfig {
-    String key
+    enum UpStreamType {
+        AUTO
+        ASK
+        TEMPO
+    }
+
+    enum DataType {
+        INTEGER
+        FLOAT
+        BOOL
+        STRING
+        JSON
+    }
+
+    class DataConfig {
+        String key
+
+    }
+
+    class EntryConfig {
+        String key
+    }
+
+    class EventConfig {
+        String key
+    }
 }
 
 DataConfig -- DataType
