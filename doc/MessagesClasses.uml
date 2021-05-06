@@ -1,0 +1,44 @@
+@startuml
+
+class Context {
+
+}
+
+
+enum UpStreamType {
+    ASK
+    TEMPO
+    AUTO
+}
+
+enum DataType {
+    INTEGER
+    FLOAT
+    BOOL
+    STRING
+    JSON
+}
+
+class Data {
+    String key
+
+}
+
+class Entry {
+    String key
+}
+
+class Event {
+    String key
+}
+
+Data -- DataType
+Data -- UpStreamType
+
+Entry -- DataType
+
+Context "0..*" -- Data : Output
+Context "0..*" -- Entry : Input
+Context "0..*" -- Event : Output
+
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+
+=== Initialization ===
+Device -> Bridge : Register(id, version)
+Bridge -> Device : Confirm(knowed)
+Device -> Bridge : Context(Context)
+
+@enduml
