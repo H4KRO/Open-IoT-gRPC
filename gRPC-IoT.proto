@@ -103,7 +103,7 @@ message ParameterConfiguration {
 
 enum ErrorCodeType {
     SUCCESS = 0;
-    FAILUTE = 1;
+    FAILURE = 1;
 }
 
 /*
