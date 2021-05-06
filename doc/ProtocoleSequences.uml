@@ -1,9 +1,29 @@
 @startuml
 
 == Initialization ==
-Device -> Bridge : RegisterRequest(id, version)
-Bridge -> Device : RegisterReply(knowed)
-Device -> Bridge : UpdateContextRequest(dataConfigs[], entryConfigs[], eventConfigs[])
-Bridge -> Device : UpdateContextReply()
+Device -> Broker : DeclareConfigurationRequest(Configuration)
+Broker -> Device : DeclareConfigurationReply(errorCode)
+
+== Configuration ==
+Device -> Broker : SetConfigurationStreamRequest()
+Broker --> Device : SetConfigurationStreamReply(Configuration)
+
+== Notification ==
+Device -> Broker : PushNotificationStreamRequest()
+Broker --> Device : PushNotificationStreamReply()
+
+== Event ==
+Device -> Broker : PostEventRequest()
+Broker -> Device : PostEventReply(errorCode)
+
+== Data (Auto or Interval)==
+Device -> Broker : UpdateDataRequest(DataOutput)
+Broker -> Device : UpdateDataReply(errorCode)
+
+== Data (Ask) ==
+Device -> Broker : GetDataStreamRequest()
+Broker --> Device : GetDataStreamReply(DataInput)
+Device -> Broker : UpdateDataRequest(DataOutput)
+Broker -> Device : UpdateDataReply(errorCode)
 
 @enduml
