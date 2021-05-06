@@ -85,7 +85,8 @@ package Structures <<node>> {
         }
 
         class DataOutput {
-
+            String key
+            String value
         }
     }
 
@@ -114,7 +115,7 @@ package Structures <<node>> {
             String value
         }
 
-        enum EventStatus {
+        enum EventStatusType {
             DISABLE
             ENABLE
         }
@@ -159,7 +160,7 @@ Configuration "0..*" -- EventConfiguration
 
 DataConfiguration -- DataUpdateType
 
-EventConfiguration -- EventStatus
+EventConfiguration -- EventStatusType
 
 Configuration "0..*" -- ParameterConfiguration
 
