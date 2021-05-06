@@ -1,64 +1,128 @@
 syntax = "proto3";
 
-package OpenGRPCIoT;
-
-service bridge {
-    rpc Register (RegisterRequest) returns (RegisterReply) {}
-    rpc UpdateConfig (UpdateConfigRequest) returns (UpdateConfigReply) {}
-}
+package gRPCBroker;
 
 /*
- * Register
+ * Messages
  */
 
-message RegisterRequest {
-    required string id = 1;
-    required int32 version = 2;
+// Event
+message PostEventRequest {
+    EventOutput eventOutput = 1;
+}
+message PostEventReply {
+    ErrorCodeType errorCode = 1;
+}
+message EventOutput {
+    string key = 1;
 }
 
-message RegisterReply {
-    required bool knowed = 1;
+// Data
+message UpdateDataRequest {
+    DataOutput dataOutput = 1;
+}
+message UpdateDataReply {
+    ErrorCodeType errorCode = 1;
+}
+message DataOutput {
+    string key = 1;
+    DataType dataType = 2;
+    string value = 3;
 }
 
-/*
- * UpdateConfig
- */
-
-message UpdateConfigRequest {
-    repeated DataConfig dataConfigs = 1;
-    repeated EntryConfig entryConfigs = 2;
-    repeated EventConfig eventConfigs = 3;
-}
-
-message UpdateConfigReply {
+message GetDataStreamRequest {
 
 }
-
-message DataConfig {
-    required string key = 1;
-    required DataType dataType = 2;
-    required UpStreamType upStreamType = 3;
+message GetDataStreamReply {
+    DataInput dataInput = 1;
+}
+message DataInput {
+    string key = 1;
 }
 
-message EntryConfig {
-    required string key = 1;
-    required DataType dataType = 2;
+// Notification
+message PushNotificationStreamRequest {
+
+}
+message PushNotificationStreamReply {
+    NotificationInput notificationInput = 1;
+}
+message NotificationInput {
+    string key = 1;
 }
 
-message EventConfig {
-    required string key = 1;
+// Configuration
+message DeclareConfigurationRequest {
+    Configuration configuration = 1;
+}
+message DeclareConfigurationReply {
+    ErrorCodeType errorCode = 1;
 }
 
-enum UpStreamType {
+message SetConfigurationStreamRequest {
+    
+}
+message SetConfigurationStreamReply {
+    Configuration configuration = 1;
+}
+
+message Configuration {
+    repeated DataConfiguration dataConfiguration = 1;
+    repeated EventConfiguration eventConfiguration = 2;
+    repeated ParameterConfiguration parameterConfiguration = 3;
+}
+
+message DataConfiguration {
+    string key = 1;
+    int32 interval = 2;
+    DataUpdateModeType dataUpdateMode = 3;
+}
+enum DataUpdateModeType {
     AUTO = 0;
     ASK = 1;
-    TEMPO = 2;
+    INTERVAL = 2;
 }
 
-enum DataType {
-    INTEGER = 0;
-    FLOAT = 1;
-    BOOL = 2;
-    STRING = 3;
-    JSON = 4;
+message EventConfiguration {
+    EventStatusType eventStatus = 1;
+}
+enum EventStatusType {
+    DISABLE = 0;
+    ENABLE = 1;
+}
+
+message ParameterConfiguration {
+    string key = 1;
+    string value = 2;
+    DataType dataType = 3;
+}
+
+/*
+ * Error
+ */
+
+enum ErrorCodeType {
+    SUCCESS = 0;
+    FAILUTE = 1;
+}
+
+/*
+ * Common
+ */
+
+ enum DataType {
+     INTEGER = 0;
+     STRING = 1;
+     FLOAT = 2;
+     BOOLEAN = 3;
+     JSON = 4;
+ }
+
+service gRPCBroker {
+    rpc PostEvent(PostEventRequest) returns (PostEventReply) {};
+    rpc UpdateData(UpdateDataRequest) returns (UpdateDataReply) {};
+    rpc PushNotificationStream(PushNotificationStreamRequest) returns (stream PushNotificationStreamReply) {};
+    rpc GetDataStream(GetDataStreamRequest) returns (stream GetDataStreamReply) {};
+    rpc DeclareConfiguration(DeclareConfigurationRequest) returns (DeclareConfigurationReply) {};
+    rpc SetConfiguration(SetConfigurationStreamRequest) returns (stream SetConfigurationStreamReply) {};
 }
