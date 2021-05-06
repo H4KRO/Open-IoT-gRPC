@@ -98,7 +98,6 @@ package Structures <<node>> {
         class DataConfiguration {
             String key
             Integer interval
-            DataType dataType
         }
 
         enum DataUpdateType {
@@ -158,6 +157,8 @@ SetConfigurationStreamReply -- Configuration
 Configuration "0..*" -- DataConfiguration
 
 Configuration "0..*" -- EventConfiguration
+
+DataConfiguration -- DataType
 
 DataConfiguration -- DataUpdateType
 
