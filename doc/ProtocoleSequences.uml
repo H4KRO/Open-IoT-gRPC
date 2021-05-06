@@ -1,8 +1,9 @@
 @startuml
 
-=== Initialization ===
-Device -> Bridge : Register(id, version)
-Bridge -> Device : Confirm(knowed)
-Device -> Bridge : Context(Context)
+== Initialization ==
+Device -> Bridge : RegisterRequest(id, version)
+Bridge -> Device : RegisterReply(knowed)
+Device -> Bridge : UpdateContextRequest(dataConfigs[], entryConfigs[], eventConfigs[])
+Bridge -> Device : UpdateContextReply()
 
 @enduml

@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package OpenGRPCIoT;
+
+service bridge {
+    rpc Register (RegisterRequest) returns (RegisterReply) {}
+    rpc UpdateContext (UpdateContextRequest) returns (UpdateContextReply) {}
+}
+
+message RegisterRequest {
+    required string id = 1;
+    required int32 version = 2;
+}
+
+message RegisterReply {
+    required string message = 1;
+    required bool knowed = 2;
+}
+
+message UpdateContextRequest {
+    repeated DataConfig dataConfigs = 1;
+    repeated EntryConfig entryConfigs = 2;
+    repeated EventConfig eventConfigs = 3;
+}
+
+message UpdateContextReply {
+
+}
+
+message DataConfig {
+    required string key = 1;
+    required DataType dataType = 2;
+    required UpStreamType upStreamType = 3;
+}
+
+message EntryConfig {
+    required string key = 1;
+    required DataType dataType = 2;
+}
+
+message EventConfig {
+    required string key = 1;
+}
+
+enum UpStreamType {
+    AUTO = 0;
+    ASK = 1;
+    TEMPO = 2;
+}
+
+enum DataType {
+    INTEGER = 0;
+    FLOAT = 1;
+    BOOL = 2;
+    STRING = 3;
+    JSON = 4;
+}

@@ -1,14 +1,14 @@
 @startuml
 
-class Context {
+class UpdateContextRequest {
 
 }
 
 
 enum UpStreamType {
+    AUTO
     ASK
     TEMPO
-    AUTO
 }
 
 enum DataType {
@@ -19,26 +19,26 @@ enum DataType {
     JSON
 }
 
-class Data {
+class DataConfig {
     String key
 
 }
 
-class Entry {
+class EntryConfig {
     String key
 }
 
-class Event {
+class EventConfig {
     String key
 }
 
-Data -- DataType
-Data -- UpStreamType
+DataConfig -- DataType
+DataConfig -- UpStreamType
 
-Entry -- DataType
+EntryConfig -- DataType
 
-Context "0..*" -- Data : Output
-Context "0..*" -- Entry : Input
-Context "0..*" -- Event : Output
+UpdateContextRequest "0..*" -- DataConfig
+UpdateContextRequest "0..*" -- EntryConfig
+UpdateContextRequest "0..*" -- EventConfig
 
 @enduml
