@@ -1,63 +1,174 @@
 @startuml
 
-package Register {
+package Messages <<node>> {
+    package Input <<rectangle>> {
+        package SetConfiguration {
+            class SetConfigurationStreamRequest {
 
-    class RegisterRequest {
-        String id
+            }
+
+            class SetConfigurationStreamReply {
+
+            }
+        }
+
+        package PushNotification {
+            class PushNotificationStreamRequest {
+
+            }
+
+            class PushNotificationStreamReply {
+
+            }
+        }
+
+        package GetData {
+            class GetDataStreamRequest {
+
+            }
+
+            class GetDataStreamReply {
+
+            }
+        }
     }
 
-    class RegisterReply {
-        bool knowed
-    }
+    package Output <<rectangle>> {
+        package DeclareConfiguration {
+            class DeclareConfigurationRequest {
 
+            }
+
+            class DeclareConfigurationReply {
+
+            }
+        }
+
+        package UpdateData {
+            class UpdateDataRequest {
+
+            }
+
+            class UpdateDataReply {
+
+            }
+        }
+
+        package PostEvent {
+            class PostEventRequest {
+
+            }
+
+            class PostEventReply {
+
+            }
+        }
+    }
 }
 
-package UpdateContext {
-
-    class UpdateContextRequest {
-
+package Structures <<node>> {
+    package Notification <<rectangle>> {
+        class NotificationInput {
+            String key
+        }
     }
 
-    class UpdateContextReply {
-
+    package Event <<rectangle>> {
+        class EventOutput {
+            String key
+        }
     }
 
+    package Data <<rectangle>> {
+        class DataInput {
+            String key
+        }
 
-    enum UpStreamType {
-        AUTO
-        ASK
-        TEMPO
+        class DataOutput {
+
+        }
     }
 
-    enum DataType {
-        INTEGER
-        FLOAT
-        BOOL
-        STRING
-        JSON
+    package Configuration <<rectangle>> {
+        class Configuration {
+
+        }
+
+        class DataConfiguration {
+            String key
+            Integer interval
+        }
+
+        enum DataUpdateType {
+            AUTO
+            ASK
+            INTERVAL
+        }
+
+        class EventConfiguration {
+
+        }
+        
+        class ParameterConfiguration {
+            String key
+            String value
+        }
+
+        enum EventStatus {
+            DISABLE
+            ENABLE
+        }
     }
 
-    class DataConfig {
-        String key
-
-    }
-
-    class EntryConfig {
-        String key
-    }
-
-    class EventConfig {
-        String key
+    package Common <<rectangle>> {
+        enum DataType {
+            INTEGER
+            STRING
+            FLOAT
+            BOOLEAN
+            JSON
+        }
     }
 }
 
-DataConfig -- DataType
-DataConfig -- UpStreamType
 
-EntryConfig -- DataType
+package Errors <<node>> {
+    enum ErrorCodeType {
+        SUCCESS
+        ERROR
+    }
+}
 
-UpdateContextRequest "0..*" -- DataConfig
-UpdateContextRequest "0..*" -- EntryConfig
-UpdateContextRequest "0..*" -- EventConfig
+PushNotificationStreamReply -- NotificationInput
+
+PostEventRequest -- EventOutput
+
+GetDataStreamReply -- DataInput
+
+UpdateDataRequest -- DataOutput
+
+DataOutput -- DataType
+
+DeclareConfigurationRequest-- Configuration
+
+SetConfigurationStreamReply -- Configuration
+
+Configuration "0..*" -- DataConfiguration
+
+Configuration "0..*" -- EventConfiguration
+
+DataConfiguration -- DataUpdateType
+
+EventConfiguration -- EventStatus
+
+Configuration "0..*" -- ParameterConfiguration
+
+ParameterConfiguration -- DataType
+
+DeclareConfigurationReply -- ErrorCodeType
+
+UpdateDataReply -- ErrorCodeType
+
+PostEventReply -- ErrorCodeType
 
 @enduml

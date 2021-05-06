@@ -4,8 +4,12 @@ package OpenGRPCIoT;
 
 service bridge {
     rpc Register (RegisterRequest) returns (RegisterReply) {}
-    rpc UpdateContext (UpdateContextRequest) returns (UpdateContextReply) {}
+    rpc UpdateConfig (UpdateConfigRequest) returns (UpdateConfigReply) {}
 }
+
+/*
+ * Register
+ */
 
 message RegisterRequest {
     required string id = 1;
@@ -13,17 +17,20 @@ message RegisterRequest {
 }
 
 message RegisterReply {
-    required string message = 1;
-    required bool knowed = 2;
+    required bool knowed = 1;
 }
 
-message UpdateContextRequest {
+/*
+ * UpdateConfig
+ */
+
+message UpdateConfigRequest {
     repeated DataConfig dataConfigs = 1;
     repeated EntryConfig entryConfigs = 2;
     repeated EventConfig eventConfigs = 3;
 }
 
-message UpdateContextReply {
+message UpdateConfigReply {
 
 }
 
