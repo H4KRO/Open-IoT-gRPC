@@ -85,6 +85,7 @@ enum DataUpdateModeType {
 
 message EventConfiguration {
     EventStatusType eventStatus = 1;
+    string key = 2;
 }
 enum EventStatusType {
     DISABLE = 0;

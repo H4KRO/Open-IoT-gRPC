@@ -107,7 +107,7 @@ package Structures <<node>> {
         }
 
         class EventConfiguration {
-
+            String key
         }
         
         class ParameterConfiguration {
