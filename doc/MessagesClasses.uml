@@ -92,7 +92,7 @@ package Structures <<node>> {
 
     package Configuration <<rectangle>> {
         class Configuration {
-
+            String id
         }
 
         class DataConfiguration {

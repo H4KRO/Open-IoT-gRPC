@@ -53,7 +53,8 @@ message NotificationInput {
 
 // Configuration
 message DeclareConfigurationRequest {
-    Configuration configuration = 1;
+    string id = 1;
+    Configuration configuration = 2;
 }
 message DeclareConfigurationReply {
     ErrorCodeType errorCode = 1;
