@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package gRPCBroker;
 
@@ -8,36 +8,36 @@ package gRPCBroker;
 
 // Event
 message PostEventRequest {
-    EventOutput eventOutput = 1;
+    optional EventOutput eventOutput = 1;
 }
 message PostEventReply {
-    ErrorCodeType errorCode = 1;
+    optional ErrorCodeType errorCode = 1;
 }
 message EventOutput {
-    string key = 1;
+    optional string key = 1;
 }
 
 // Data
 message UpdateDataRequest {
-    DataOutput dataOutput = 1;
+    optional DataOutput dataOutput = 1;
 }
 message UpdateDataReply {
-    ErrorCodeType errorCode = 1;
+    optional ErrorCodeType errorCode = 1;
 }
 message DataOutput {
-    string key = 1;
-    DataType dataType = 2;
-    string value = 3;
+    optional string key = 1;
+    optional DataType dataType = 2;
+    optional string value = 3;
 }
 
 message GetDataStreamRequest {
 
 }
 message GetDataStreamReply {
-    DataInput dataInput = 1;
+    optional DataInput dataInput = 1;
 }
 message DataInput {
-    string key = 1;
+    optional string key = 1;
 }
 
 // Notification
@@ -45,26 +45,26 @@ message PushNotificationStreamRequest {
 
 }
 message PushNotificationStreamReply {
-    NotificationInput notificationInput = 1;
+    optional NotificationInput notificationInput = 1;
 }
 message NotificationInput {
-    string key = 1;
+    optional string key = 1;
 }
 
 // Configuration
 message DeclareConfigurationRequest {
-    string id = 1;
-    Configuration configuration = 2;
+    optional string id = 1;
+    optional Configuration configuration = 2;
 }
 message DeclareConfigurationReply {
-    ErrorCodeType errorCode = 1;
+    optional ErrorCodeType errorCode = 1;
 }
 
 message SetConfigurationStreamRequest {
     
 }
 message SetConfigurationStreamReply {
-    Configuration configuration = 1;
+    optional Configuration configuration = 1;
 }
 
 message Configuration {
@@ -74,10 +74,10 @@ message Configuration {
 }
 
 message DataConfiguration {
-    string key = 1;
-    int32 interval = 2;
-    DataUpdateModeType dataUpdateMode = 3;
-    DataType dataType = 4;
+    optional string key = 1;
+    optional int32 interval = 2;
+    optional DataUpdateModeType dataUpdateMode = 3;
+    optional DataType dataType = 4;
 }
 enum DataUpdateModeType {
     AUTO = 0;
@@ -86,8 +86,8 @@ enum DataUpdateModeType {
 }
 
 message EventConfiguration {
-    EventStatusType eventStatus = 1;
-    string key = 2;
+    optional EventStatusType eventStatus = 1;
+    optional string key = 2;
 }
 enum EventStatusType {
     DISABLE = 0;
@@ -95,9 +95,9 @@ enum EventStatusType {
 }
 
 message ParameterConfiguration {
-    string key = 1;
-    string value = 2;
-    DataType dataType = 3;
+    optional string key = 1;
+    optional string value = 2;
+    optional DataType dataType = 3;
 }
 
 /*

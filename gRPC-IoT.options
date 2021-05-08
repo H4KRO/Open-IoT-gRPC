@@ -1,0 +1,10 @@
+gRPCBroker.EventOutput.key max_size:128
+gRPCBroker.DataOutput.key max_size:128
+gRPCBroker.DataOutput.value max_size:128
+gRPCBroker.DataInput.key max_size:128
+gRPCBroker.NotificationInput.key max_size:128
+gRPCBroker.DeclareConfigurationRequest.id max_size:128
+gRPCBroker.DataConfiguration.key max_size:128
+gRPCBroker.EventConfiguration.key max_size:128
+gRPCBroker.ParameterConfiguration.key max_size:128
+gRPCBroker.ParameterConfiguration.value max_size:128
