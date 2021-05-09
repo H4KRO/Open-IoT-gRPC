@@ -1,4 +1,4 @@
-# Open-IoT-gRPC
+# Open-IoT-ProtoBuff
 
 ## Documentation
 
